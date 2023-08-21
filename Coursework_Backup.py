@@ -14,11 +14,11 @@ class VkFotoDownload:
     def get_photo(self, count=5):
         url = 'https://api.vk.com/method/photos.get'
        
-        photo_input = input('Сколько фоток скачать? (по умолчанию 5, ввести у):')
-        if photo_input == 'y' or photo_input == 'у':
-            count = 5
-        else:
+        photo_input = input('Сколько фоток скачать? (по умолчанию 5, нажмите Enter):')
+        try:
             count = int(photo_input)
+        except ValueError:
+            pass
             
         params = {
             'owner_id' : self.user_id,
@@ -59,7 +59,7 @@ class VkFotoDownload:
             file_json.append(photo_info_json)
     
         # Записываем данные о всех скачанных фоторафиях в файл .json    
-        with open('C:/Users/iiko/OneDrive/Desktop/NETOLOGY/VK_Ya_disk/photos_vk.json', 'w') as file:
+        with open('photos_vk.json', 'w') as file:
             json.dump(file_json, file, indent=2)
         
         return max_size_photo
